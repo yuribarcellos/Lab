@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  glpi_app:
+    image: sdbrasil/glpi:10.0.15
+    restart: unless-stopped
+    container_name: glpi-10
+#    volumes:
+#      - /apps/glpi/glpi/glpi_config:/etc/glpi
+    networks:
+      - net_infra
+    ports:
+      - 8082:80
+
+  glpidb:
+    image: percona/percona-server:8.0
+    restart: unless-stopped
+    container_name: db-glpi-10
+    security_opt:
+      - seccomp:unconfined
+    networks:
+      - net_infra
+    environment:
+      - MYSQL_ROOT_PASSWORD=:05`93/1`^]?}^39~5#
+      - MYSQL_DATABASE=glpi
+      - MYSQL_USER=glpi
+      - MYSQL_PASSWORD=[|=/& $}#%;1
+      - TZ=America/Sao_Paulo
+
+networks:
+  net_infra:
+    external: true
