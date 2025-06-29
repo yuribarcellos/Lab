@@ -1,0 +1,35 @@
+version: '3.5'
+
+services:
+  zabbix-server:
+    container_name: zabbix-server
+    image: zabbix/zabbix-server-mysql:alpine-6.0-latest
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: ${DB_SERVER_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      ZBX_CACHESIZE: 256M
+    ports:
+      - "10051:10051"
+    volumes:
+      - /apps/zabbix/zabbix/alertscripts:/usr/lib/zabbix/alertscripts
+      - /apps/zabbix/zabbix/externalscripts:/usr/lib/zabbix/externalscripts
+      - /apps/zabbix/zabbix/logs:/var/log/zabbix
+
+  zabbix-web:
+    container_name: zabbix-web
+    image: zabbix/zabbix-web-nginx-mysql:alpine-6.0-latest
+    restart: unless-stopped
+    environment:
+      DB_SERVER_HOST: ${DB_SERVER_HOST}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      ZBX_SERVER_HOST: zabbix-server
+      PHP_TZ: America/Sao_Paulo
+    ports:
+      - "8081:8080"
+    volumes:
+      - /apps/zabbix/zabbix/ssl:/etc/ssl
