@@ -1,0 +1,19 @@
+services:
+  grafana:
+    image: grafana/grafana-oss:10.0.10
+    container_name: grafana
+    volumes:
+      - /mysql/grafana/grafana_db:/var/lib/grafana
+      - /apps/grafana/grafana_conf:/etc/grafana
+    ports:
+      - 8083:3000
+    networks:
+      - net_infra
+
+networks:
+  net_infra:
+    external: true
+
+volumes:
+  grafana_db:
+  grafana_conf:
