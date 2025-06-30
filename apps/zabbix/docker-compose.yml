@@ -9,9 +9,6 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/conf.d:/etc/mysql/conf.d
     ports:
       - "3306:3306"
 
@@ -26,10 +23,6 @@ services:
       ZBX_CACHESIZE: 256M
     depends_on:
       - mysql
-    volumes:
-      - ./zabbix/alertscripts:/usr/lib/zabbix/alertscripts
-      - ./zabbix/externalscripts:/usr/lib/zabbix/externalscripts
-      - ./zabbix/logs:/var/log/zabbix
     ports:
       - "10051:10051"
 
@@ -47,8 +40,6 @@ services:
       - zabbix-server
     ports:
       - "8080:8080"
-    volumes:
-      - ./zabbix/ssl:/etc/ssl
 
   zabbix-agent:
     image: zabbix/zabbix-agent:latest
