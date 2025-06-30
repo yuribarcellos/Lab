@@ -13,7 +13,7 @@ services:
       - "3306:3306"
 
   zabbix-server:
-    image: zabbix/zabbix-server-mysql:latest
+    image: zabbix/zabbix-server-mysql:6.0-latest
     restart: unless-stopped
     environment:
       DB_SERVER_HOST: mysql
@@ -27,7 +27,7 @@ services:
       - "10051:10051"
 
   zabbix-web:
-    image: zabbix/zabbix-web-nginx-mysql:latest
+    image: zabbix/zabbix-web-nginx-mysql:6.0-latest
     restart: unless-stopped
     environment:
       DB_SERVER_HOST: mysql
@@ -42,7 +42,7 @@ services:
       - "8080:8080"
 
   zabbix-agent:
-    image: zabbix/zabbix-agent:latest
+    image: zabbix/zabbix-agent:6.0-latest
     restart: unless-stopped
     environment:
       ZBX_SERVER_HOST: zabbix-server
