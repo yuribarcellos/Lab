@@ -15,7 +15,7 @@ fi
 COMPOSE_PATHS=(
   "/root/Lab/apps/zabbix"
   "/root/Lab/apps/grafana"
-  "/root/Lab/apps/glpi"
+#  "/root/Lab/apps/glpi"
 )
 
 echo "🚀 Iniciando serviços Docker Compose..."
