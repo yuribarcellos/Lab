@@ -27,7 +27,6 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./zabbix/etc:/etc/zabbix
       - ./zabbix/alertscripts:/usr/lib/zabbix/alertscripts
       - ./zabbix/externalscripts:/usr/lib/zabbix/externalscripts
       - ./zabbix/logs:/var/log/zabbix
